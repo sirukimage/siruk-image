@@ -6,8 +6,17 @@
         >
             <div class="flex justify-center">
                 <div class="mt-8">
+                    <div class="mb-5">
+                        Dont have username?
+                        <NuxtLink
+                            :to="url"
+                            style="border-bottom: 1px solid grey;"
+                        > Sign In to Imgur </NuxtLink>
+                    </div>
                     <label for="image-title">USERNAME</label> <br>
                     <input
+                        style="border: 1px solid grey; border-radius: 8px ; padding: 4px;"
+                        class="bg-transparent"
                         autofocus
                         @focus="console.log($event.target.select())"
                         id="image=title"
@@ -29,8 +38,12 @@
                     <div class="mt-3">
                         <button
                             class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
+                            style="border: 1px solid white;;"
                             type="submit"
-                        >SUBMIT</button>
+                            :disabled="disableButton"
+                        >
+                            {{ disableButton ? 'Loading..' : 'SUBMIT' }}
+                        </button>
                     </div>
                     <img
                         :src="imageLink"
@@ -46,14 +59,18 @@
                 </div>
             </div>
         </form>
-        <div class="absolute top-0 right-0">
+        <div class="absolute top-0 right-0 p-3">
             <ClientOnly>
-                <select v-model="$colorMode.preference">
+                <select
+                    class="bg-transparent outline-green-400 p-1 px-3"
+                    style="border: 1px solid lightseagreen; border-radius: 8px;"
+                    v-model="$colorMode.preference"
+                >
                     <option value="system">System</option>
                     <option value="light">Light</option>
                     <option value="dark">Dark</option>
                     <option value="sepia">Sepia</option>
-                    <option value="tilte">Tilte</option>
+                    <!-- <option value="tilte">Tilte</option> -->
                 </select>
             </ClientOnly>
         </div>
@@ -62,11 +79,12 @@
 
 <script setup>
 const colorMode = useColorMode()
-
+const url = 'https://api.imgur.com/oauth2/authorize?client_id=b5397916875dde8&response_type=token&state=NEW_REGISTRATION'
 const imageFile = ref(null)
 const username = ref('')
 const token = ref(null);
 const imageLink = ref(null);
+const disableButton = ref(false);
 onMounted(() => {
     const route = useRoute()
     username.value = route.query.username;
@@ -96,6 +114,7 @@ function onChangeImageUploader(data) {
 
 async function onSubmitImage() {
     try {
+        disableButton.value = true;
         const fd = new FormData();
         fd.append('image', imageFile.value);
         // fd.append('title', username.value);
@@ -116,7 +135,10 @@ async function onSubmitImage() {
 
         imageLink.value = res.data.link
 
+        disableButton.value = false;
     } catch (error) {
+        disableButton.value = false;
+        alert(error.message)
         console.error(error.message);
     }
 }
@@ -139,8 +161,8 @@ body {
     color: #433422;
 }
 
-.tilte-mode body {
+/* .tilte-mode body {
     background-color: lightslategray;
     color: lightcyan;
-}
+} */
 </style>
