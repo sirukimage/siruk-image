@@ -42,7 +42,7 @@
                             type="submit"
                             :disabled="disableButton"
                         >
-                            {{ disableButton ? 'Loading..' : 'SUBMIT' }}
+                            {{ disableButton ? 'Uploading..' : 'SUBMIT' }}
                         </button>
                     </div>
                     <img
@@ -51,11 +51,36 @@
                     >
                     <div class="mt-3">
                         <a
+                            v-if="imageLink"
                             :href="imageLink"
                             target="_blank"
                         >VIEW IMAGE</a>
                     </div>
+                    <div
+                        class="mt-32"
+                        @click="onClickCopy"
+                        v-if="route.query.username"
+                    >
+                        <div class="text-2xl">READY TO CODE?</div>
+                        <br>
+                        <div>
+                            MAKE AN HTTP POST REQUEST TO
+                        </div>
+                        <div>
+                            {{ `${baseUrl}api/images` }}
+                        </div>
 
+                        <br>
+                        <div>
+                            will the following multi part form data:
+                        </div>
+                        <div>
+                            -username: {{ route.query?.username }} [string]
+                        </div>
+                        <div>
+                            -image: ImageFile [Binary Large OBject (blob/binary)]
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>
@@ -78,6 +103,8 @@
 </template>
 
 <script setup>
+const route = useRoute()
+const baseUrl = ref('')
 const colorMode = useColorMode()
 const url = 'https://api.imgur.com/oauth2/authorize?client_id=b5397916875dde8&response_type=token&state=NEW_REGISTRATION'
 const imageFile = ref(null)
@@ -86,7 +113,8 @@ const token = ref(null);
 const imageLink = ref(null);
 const disableButton = ref(false);
 onMounted(() => {
-    const route = useRoute()
+
+    baseUrl.value = window.location.href;
     username.value = route.query.username;
     try {
         // $fetch('/api/images', {
@@ -97,6 +125,13 @@ onMounted(() => {
     }
 })
 
+
+
+function onClickCopy() {
+    if (process.client) {
+        navigator.clipboard.writeText(`${baseUrl.value}api/images`)
+    }
+}
 async function getTokens() {
     try {
         const res = await $fetch('/api/tokens')
@@ -138,8 +173,12 @@ async function onSubmitImage() {
         disableButton.value = false;
     } catch (error) {
         disableButton.value = false;
-        alert(error.message)
-        console.error(error.message);
+        console.log('error resonse: ', error.response)
+        console.log('errro data: ', error.data.message)
+        alert(error.response?._data?.data?.message ?? error.message)
+        // alert(error.response?.data?.message ?? error.message)
+        // alert(error.data?.message ?? error.message)
+        console.error(error);
     }
 }
 
