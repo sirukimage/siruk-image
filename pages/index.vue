@@ -67,7 +67,7 @@
                             MAKE AN HTTP POST REQUEST TO
                         </div>
                         <div>
-                            {{ `${baseUrl}api/images` }}
+                            {{ `${baseUrl}/api/images` }}
                         </div>
 
                         <br>
@@ -114,7 +114,7 @@ const imageLink = ref(null);
 const disableButton = ref(false);
 onMounted(() => {
 
-    baseUrl.value = window.location.href;
+    baseUrl.value = window.location.origin;
     username.value = route.query.username;
     try {
         // $fetch('/api/images', {
@@ -129,7 +129,7 @@ onMounted(() => {
 
 function onClickCopy() {
     if (process.client) {
-        navigator.clipboard.writeText(`${baseUrl.value}api/images`)
+        navigator.clipboard.writeText(`${baseUrl.value}/api/images`)
     }
 }
 async function getTokens() {
