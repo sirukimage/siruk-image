@@ -1,4 +1,4 @@
-import { version, ref, watchEffect, watch, getCurrentInstance, toRef, isRef, defineComponent, provide, shallowReactive, h, inject, Suspense, nextTick, Transition, unref, useSSRContext, createApp, effectScope, reactive, onErrorCaptured, onServerPrefetch, createVNode, resolveDynamicComponent, hasInjectionContext, defineAsyncComponent, mergeProps, shallowRef, isReadonly, isShallow, isReactive, toRaw } from 'vue';
+import { hasInjectionContext, inject, version, ref, watchEffect, watch, getCurrentInstance, toRef, isRef, defineComponent, provide, shallowReactive, h, Suspense, nextTick, Transition, unref, useSSRContext, createApp, effectScope, reactive, onErrorCaptured, onServerPrefetch, createVNode, resolveDynamicComponent, defineAsyncComponent, mergeProps, shallowRef, isReadonly, isShallow, isReactive, toRaw } from 'vue';
 import { $ as $fetch, w as withQuery, n as hasProtocol, p as parseURL, o as isScriptProtocol, q as joinURL, t as defu, v as sanitizeStatusCode, x as createHooks, k as createError$1, y as isSamePath, z as toRouteMatcher, A as createRouter$1 } from '../runtime.mjs';
 import { b as baseURL } from '../routes/renderer.mjs';
 import { getActiveHead } from 'unhead';
@@ -668,7 +668,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0 ,
-    component: () => import('./index-hPYKsMa7.mjs').then((m) => m.default || m)
+    component: () => import('./index-COOJ7Q6P.mjs').then((m) => m.default || m)
   },
   {
     name: "token",
@@ -676,7 +676,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0 ,
-    component: () => import('./index-BpzFhGbf.mjs').then((m) => m.default || m)
+    component: () => import('./index-Cvbydwmh.mjs').then((m) => m.default || m)
   }
 ];
 const _wrapIf = (component, props, slots) => {
@@ -1231,8 +1231,8 @@ const _sfc_main$1 = {
     const statusMessage = _error.statusMessage ?? (is404 ? "Page Not Found" : "Internal Server Error");
     const description = _error.message || _error.toString();
     const stack = void 0;
-    const _Error404 = defineAsyncComponent(() => import('./error-404-CynNoxE0.mjs').then((r) => r.default || r));
-    const _Error = defineAsyncComponent(() => import('./error-500-CVOSz7kS.mjs').then((r) => r.default || r));
+    const _Error404 = defineAsyncComponent(() => import('./error-404-CMDoDXg9.mjs').then((r) => r.default || r));
+    const _Error = defineAsyncComponent(() => import('./error-500-CJvFoBOQ.mjs').then((r) => r.default || r));
     const ErrorTemplate = is404 ? _Error404 : _Error;
     return (_ctx, _push, _parent, _attrs) => {
       _push(ssrRenderComponent(unref(ErrorTemplate), mergeProps({ statusCode: unref(statusCode), statusMessage: unref(statusMessage), description: unref(description), stack: unref(stack) }, _attrs), null, _parent));
@@ -1310,5 +1310,5 @@ let entry;
 }
 const entry$1 = (ssrContext) => entry(ssrContext);
 
-export { _export_sfc as _, useRuntimeConfig as a, navigateTo as b, useHead as c, useState as d, entry$1 as default, nuxtLinkDefaults as n, useRouter as u };
+export { _export_sfc as _, useState as a, useRoute as b, useRouter as c, useRuntimeConfig as d, entry$1 as default, navigateTo as e, nuxtLinkDefaults as n, useHead as u };
 //# sourceMappingURL=server.mjs.map
