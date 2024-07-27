@@ -19,7 +19,7 @@ const _sfc_main = {
       const _component_ClientOnly = __nuxt_component_0;
       _push(`<div${ssrRenderAttrs(_attrs)}>`);
       _push(ssrRenderComponent(_component_ClientOnly, null, {}, _parent));
-      _push(`<a${ssrRenderAttr("href", url)}><button class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none" type="submit">Sign In to Imgur</button></a><div class="flex justify-center text-3xl"> USERNAME: ${ssrInterpolate(unref(tokenData).account_username)}</div></div>`);
+      _push(`<a${ssrRenderAttr("href", url)}></a><div class="flex justify-center text-3xl"> USERNAME: ${ssrInterpolate(unref(tokenData).account_username)}</div></div>`);
     };
   }
 };
@@ -31,4 +31,4 @@ _sfc_main.setup = (props, ctx) => {
 };
 
 export { _sfc_main as default };
-//# sourceMappingURL=index-BpzFhGbf.mjs.map
+//# sourceMappingURL=index-Cvbydwmh.mjs.map
